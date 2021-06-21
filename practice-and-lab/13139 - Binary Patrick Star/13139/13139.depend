@@ -1,0 +1,16 @@
+# depslib dependency file v1.0
+1617205167 source:c:\users\lenovo\desktop\13139.c
+	<stdio.h>
+	"function.h"
+
+1617202988 c:\users\lenovo\desktop\function.h
+
+1514140574 source:c:\users\lenovo\desktop\13139\main.c
+	<stdio.h>
+	<stdlib.h>
+
+1617210993 source:c:\users\lenovo\desktop\function.c
+	<stdio.h>
+	<stdlib.h>
+	"function.h"
+
