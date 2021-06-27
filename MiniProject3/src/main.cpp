@@ -6,7 +6,6 @@
 #include <string>
 #include <vector>
 
-
 struct Point {
   int x, y;
   Point() : Point(0, 0) {}
@@ -226,7 +225,7 @@ const std::string file_log = "gamelog.txt";
 const std::string file_state = "state";
 const std::string file_action = "action";
 // Timeout is set to 10 when TA test your code.
-const int timeout = 10;
+const int timeout = 20;
 
 void launch_executable(std::string filename) {
 #if defined(WIN32) || defined(_WIN32) || defined(__WIN32__) || defined(__NT__)

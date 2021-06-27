@@ -178,14 +178,11 @@ vector<Point> next_valid_spots;
 vector<Point> valid_spots;
 
 void initScoreBoard() {
-  score_board[0] = {9999, 1, 1, 1, 1, 1, 1, 9999};
-  score_board[1] = {1, 1, 1, 1, 1, 1, 1, 1};
-  score_board[2] = {1, 1, 1, 1, 1, 1, 1, 1};
-  score_board[3] = {1, 1, 1, 1, 1, 1, 1, 1};
-  score_board[4] = {1, 1, 1, 1, 1, 1, 1, 1};
-  score_board[5] = {1, 1, 1, 1, 1, 1, 1, 1};
-  score_board[6] = {1, 1, 1, 1, 1, 1, 1, 1};
-  score_board[7] = {9999, 1, 1, 1, 1, 1, 1, 9999};
+  for(int i = 0; i < SIZE; i++)
+    for(int j = 0; j < SIZE; j++)
+      score_board[i][j] = 1;
+
+  score_board[0][0] = score_board[0][7] = score_board[7][0] = score_board[7][7] = 9999;
 }
 
 int ABP(/*node*/ OthelloBoard now, int depth, int alpha, int beta,
@@ -219,9 +216,9 @@ int ABP(/*node*/ OthelloBoard now, int depth, int alpha, int beta,
       value = max(value, ABP(_try, depth - 1, alpha, beta, false));
       alpha = max(alpha, value);
 
-      // if alpha >= beta
+      // if beta <= alpha
       // break (*pruning beta*)
-      if (alpha >= beta)
+      if (beta <= alpha)
         break;
     }
     // return value
@@ -240,9 +237,9 @@ int ABP(/*node*/ OthelloBoard now, int depth, int alpha, int beta,
       value = min(value, ABP(_try, depth - 1, alpha, beta, true));
       beta = min(beta, value);
 
-      // if alpha >= beta
+      // if beta <= alpha
       // break (*pruning alpha*)
-      if (alpha >= beta)
+      if (beta <= alpha)
         break;
     }
     return value;
@@ -293,7 +290,7 @@ void write_valid_spot(ofstream &fout) {
   for (auto tmp : valid_spots) {
     OthelloBoard _try = now;
     _try.put_disc(tmp);
-    int val = ABP(_try, 7, -999999, 999999, true);
+    int val = ABP(_try, 7, -99999999, 99999999, true);
 
     if (val > best) {
       best = val;
