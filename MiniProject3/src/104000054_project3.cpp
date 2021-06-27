@@ -276,8 +276,6 @@ void write_valid_spot(ofstream &fout) {
     }
   }
 
-  // create a new board and copy data
-  // find max with this new board
   OthelloBoard now;
   for (int i = 0; i < SIZE; i++)
     for (int j = 0; j < SIZE; j++)
@@ -285,7 +283,8 @@ void write_valid_spot(ofstream &fout) {
   now.cur_player = player;
   now.next_valid_spots = valid_spots;
 
-  int best = -2;
+  int best = -1;
+  
   Point ans;
   for (auto tmp : valid_spots) {
     OthelloBoard _try = now;
@@ -296,17 +295,10 @@ void write_valid_spot(ofstream &fout) {
       best = val;
       ans = tmp;
     }
+
+    fout << ans.x << " " << ans.y << endl;
+    fout.flush();
   }
-
-  fout << ans.x << " " << ans.y << endl;
-  fout.flush();
-
-  // Choose random spot. (Not random uniform here)
-  /*int index = (rand() % n_valid_spots);
-  Point p = next_valid_spots[index];
-  // Remember to flush the output to ensure the last action is written to file.
-  fout << p.x << " " << p.y << endl;
-  fout.flush();*/
 }
 
 int main(int, char **argv) {
